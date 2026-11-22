@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OASIS · Monitoreo de microplásticos en agua potable</title>
+<meta name="description" content="Oasis detecta y monitorea posibles microplásticos en el agua de los dispensadores de garrafón del CUGDL.">
+<style>
+:root{--ink:#13293D;--pink:#DA627D;--berry:#A53860;--ice:#F7F9F9;--teal:#50808E;--card:#fff;--soft:#E6EEF0;--mute:#5B6B77;--navy2:#1D3B55}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",Inter,Arial,sans-serif;background:var(--ice);color:var(--ink);line-height:1.5}
+a{color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:20;background:rgba(19,41,61,.96);backdrop-filter:blur(6px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;color:var(--ice);font-weight:800;letter-spacing:.5px;text-decoration:none;font-size:20px}
+.brand svg{width:30px;height:30px}
+.menu{display:flex;gap:20px;font-size:14px}
+.menu a{color:#C9D6DB;text-decoration:none}.menu a:hover{color:#fff}
+.live{font-size:13px;color:var(--ice);background:var(--berry);padding:6px 12px;border-radius:20px;text-decoration:none;white-space:nowrap}
+.live i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#7DE0A8;margin-right:6px;animation:p 1.5s infinite}
+@keyframes p{50%{opacity:.3}}
+.hero{background:var(--ink);color:var(--ice);padding:84px 0 96px;position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero h1{font-size:46px;line-height:1.1;margin:0 0 16px}
+.hero h1 span{color:var(--pink)}
+.hero p{font-size:19px;color:#C9D6DB;max-width:520px}
+.btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-block;padding:13px 22px;border-radius:12px;font-weight:700;text-decoration:none;font-size:15px;border:2px solid var(--pink);cursor:pointer;font-family:inherit}
+.btn.p{background:var(--pink);color:var(--ink)}.btn.s{background:transparent;color:var(--ice)}
+.hero svg.art{width:100%;height:auto}
+section{padding:72px 0;scroll-margin-top:64px}
+section.alt{background:#fff}
+h2{font-size:34px;margin:0 0 8px}
+.lead{color:var(--mute);font-size:18px;max-width:680px;margin:0 0 36px}
+.grid{display:grid;gap:20px}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1.5px solid var(--soft);border-radius:18px;padding:24px}
+.ico{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;font-size:20px;margin-bottom:14px}
+.card h3{margin:0 0 6px;font-size:19px}.card p{margin:0;color:var(--mute);font-size:15px}
+.ods{background:var(--ink);color:var(--ice);border:none;display:flex;gap:16px;align-items:center}
+.ods .ico{margin:0;flex:none}.ods b{font-size:17px}
+.flow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:center;margin:10px 0 34px}
+.node{background:var(--ink);color:var(--ice);padding:12px 18px;border-radius:14px;font-weight:700;font-size:15px;border:2px solid var(--teal);text-align:center}
+.node.hl{border-color:var(--pink)}
+.arr{color:var(--pink);font-weight:800;font-size:22px}
+.steps .card{position:relative;padding-top:34px}
+.num{position:absolute;top:-16px;left:22px;width:36px;height:36px;border-radius:50%;background:var(--pink);color:var(--ink);font-weight:800;display:grid;place-items:center}
+/* dashboard */
+.dash{background:var(--ink);border-radius:26px;padding:28px;color:var(--ice)}
+.dhead{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:22px}
+.dhead h3{margin:0;font-size:22px}.tag{font-size:12px;background:var(--navy2);border:1px solid var(--teal);padding:4px 10px;border-radius:20px;color:#9CC3CE}
+.kpis{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:16px;margin-bottom:16px}
+.k{background:var(--navy2);border:1px solid #2c4b66;border-radius:18px;padding:18px}
+.k small{color:#9CC3CE;font-size:13px}.k .v{font-size:38px;font-weight:800;line-height:1.15}
+.k.big{background:var(--berry);border-color:var(--berry)}.k.big small{color:#fbe0e8}.k.big .v{font-size:64px}
+.chip{display:inline-block;border-radius:20px;padding:3px 12px;font-size:13px;font-weight:700;background:var(--ice);color:var(--berry);margin-top:4px}
+.chip.ok{color:#1d7a50}.chip.mid{color:#9a6a00}.chip.hi{color:#b3261e}
+.panels{display:grid;grid-template-columns:1fr 1.25fr;gap:16px}
+.panel{background:var(--navy2);border:1px solid #2c4b66;border-radius:18px;padding:18px}
+.panel h4{margin:0 0 12px;font-size:16px;color:#C9D6DB}
+canvas#cam{width:100%;height:auto;border-radius:14px;background:#050b12;display:block}
+.legend{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:13px;color:#C9D6DB}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px}
+#chart{width:100%;height:auto;display:block}
+.stat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px}
+.dev{font-size:13px;background:#0f2234;border-radius:12px;padding:10px;text-align:center;color:#C9D6DB;border:1px solid #2c4b66}
+.dev b{display:block;color:var(--ice);font-size:14px}.dev.on b::before{content:"● ";color:#7DE0A8}
+.cycle{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.cs{font-size:13px;padding:6px 12px;border-radius:20px;background:#0f2234;border:1px solid #2c4b66;color:#9CC3CE;transition:.3s}
+.cs.act{background:var(--pink);color:var(--ink);border-color:var(--pink);font-weight:700}
+.cs.done{background:var(--teal);color:#fff;border-color:var(--teal)}
+.alerts li{margin:6px 0;font-size:14px;list-style:none;background:#0f2234;border-radius:10px;padding:8px 12px}
+.alerts{padding:0;margin:0}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:14px;overflow:hidden;border:1.5px solid var(--soft)}
+th{background:var(--ink);color:var(--ice);text-align:left;padding:12px 16px;font-size:14px}
+td{padding:11px 16px;border-top:1px solid var(--soft);font-size:15px}td.r,th.r{text-align:right}
+tr.n td{background:#F9E3E9}tr.t td{background:var(--berry);color:#fff;font-weight:800}
+.note{font-size:13px;color:var(--mute);margin-top:12px}
+.gantt{display:grid;grid-template-columns:200px repeat(10,minmax(0,1fr));gap:4px 3px;font-size:14px;align-items:center}
+.gantt .m{background:var(--ink);color:#fff;text-align:center;border-radius:6px;padding:4px 0;font-size:12px;font-weight:700}
+.gantt .bar{height:22px;border-radius:11px}
+.team .card{text-align:center}.team .ico{margin:0 auto 12px;width:64px;height:64px;font-size:22px}
+.quote{background:var(--ink);color:var(--ice);text-align:center;padding:80px 0}
+.quote p{font-size:38px;font-weight:800;margin:0;line-height:1.2}.quote span{color:var(--pink)}
+footer{background:#0c1c2b;color:#9CB0BC;padding:26px 0;font-size:14px;text-align:center}
+@media(max-width:900px){table{display:block;overflow-x:auto}.hero .wrap,.g3,.g4,.g2,.panels{grid-template-columns:1fr}.kpis{grid-template-columns:1fr 1fr}.menu{display:none}.hero h1{font-size:34px}.stat{grid-template-columns:1fr 1fr}.gantt{grid-template-columns:110px repeat(10,minmax(0,1fr));font-size:11px}.gantt .m{font-size:9px}.quote p{font-size:28px}}
+.m3d{display:grid;grid-template-columns:1.6fr 1fr;gap:24px;align-items:center;background:var(--ink);border-radius:26px;padding:20px 28px;color:var(--ice)}.m3d canvas{width:100%;height:auto;display:block}.parts{counter-reset:n;list-style:none;padding:0;margin:0}.parts li{counter-increment:n;display:flex;align-items:center;gap:12px;padding:7px 0;font-size:16px}.parts li::before{content:counter(n);flex:none;width:30px;height:30px;border-radius:50%;background:var(--berry);border:2px solid var(--ice);display:grid;place-items:center;font-weight:800;font-size:14px}@media(max-width:900px){.m3d{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="brand" href="#"><svg viewBox="0 0 64 64"><circle cx="28" cy="28" r="18" fill="none" stroke="#F7F9F9" stroke-width="7"/><line x1="41" y1="41" x2="58" y2="58" stroke="#F7F9F9" stroke-width="8" stroke-linecap="round"/><path d="M28 15C22 23 19 28 19 32a9 9 0 0 0 18 0c0-4-3-9-9-17z" fill="#50808E"/><circle cx="26" cy="33" r="2.3" fill="#DA627D"/><circle cx="31" cy="30" r="1.8" fill="#DA627D"/><circle cx="29" cy="37" r="1.8" fill="#DA627D"/></svg>OASIS</a>
+<div class="menu"><a href="#problema">Problemática</a><a href="#porque">Por qué Oasis</a><a href="#ods">ODS</a><a href="#funciona">Cómo funciona</a><a href="#dashboard">Dashboard</a><a href="#modelo3d">Modelo 3D</a><a href="#costos">Costos</a><a href="#anexos">Anexos</a><a href="#equipo">Equipo</a></div>
+<a class="live" href="#dashboard"><i></i>Monitoreo en vivo</a></div></nav>
+
+<header class="hero"><div class="wrap">
+<div><h1>Lo invisible <span>también se mide.</span></h1>
+<p>Oasis detecta y monitorea posibles microplásticos en el agua que sale de los dispensadores de garrafón. Mide partículas por litro, solo y sin intervención en cada muestra.</p>
+<div class="btns"><a class="btn p" href="#dashboard">Ver el dashboard</a><a class="btn s" href="#funciona">Cómo funciona</a></div></div>
+<svg class="art" viewBox="0 0 420 340" role="img" aria-label="Dispositivo Oasis"><rect x="20" y="290" width="380" height="18" rx="9" fill="#1D3B55"/><rect x="110" y="60" width="150" height="210" rx="16" fill="#0B1B2A" stroke="#8FB9C4" stroke-width="3"/><rect x="170" y="80" width="30" height="90" rx="6" fill="#3A4B5A"/><g fill="#A53860"><rect x="167" y="96" width="36" height="6"/><rect x="167" y="112" width="36" height="6"/><rect x="167" y="128" width="36" height="6"/></g><ellipse cx="185" cy="205" rx="48" ry="11" fill="none" stroke="#F7F9F9" stroke-width="6"/><ellipse cx="185" cy="232" rx="40" ry="9" fill="#DDE5E8"/><ellipse cx="185" cy="232" rx="28" ry="6" fill="#0B1B2A"/><g fill="#DA627D"><circle cx="172" cy="232" r="2.5"/><circle cx="190" cy="230" r="2.5"/><circle cx="198" cy="234" r="2.5"/></g><rect x="20" y="210" width="26" height="78" rx="6" fill="#C9D1D6"/><circle cx="76" cy="248" r="19" fill="#C9D1D6" stroke="#13293D" stroke-width="3"/><circle cx="76" cy="248" r="12" fill="#13293D"/><circle cx="76" cy="248" r="3" fill="#F7F9F9"/><path d="M46 248H57M95 248H137" stroke="#8FB9C4" stroke-width="7" stroke-linecap="round"/><rect x="290" y="270" width="100" height="20" rx="4" fill="#2F8F6B"/><rect x="290" y="30" width="110" height="94" rx="12" fill="#1D3B55" stroke="#50808E" stroke-width="2"/><text x="302" y="58" font-size="11" fill="#9CC3CE" font-family="Arial">Partículas por litro</text><text x="302" y="100" font-size="34" font-weight="700" fill="#DA627D" font-family="Arial">12</text><path d="M340 270V130" stroke="#DA627D" stroke-width="2" stroke-dasharray="3 7"/></svg>
+</div></header>
+
+<section id="problema"><div class="wrap">
+<h2>Problemática</h2><p class="lead">Beber agua en el campus no debería ser un acto de fe.</p>
+<div class="grid g3">
+<div class="card"><div class="ico" style="background:var(--teal)">1</div><h3>Agua insegura en la llave</h3><p>Escasez, cortes y sedimentos hacen riesgoso beber del grifo en el Área Metropolitana de Guadalajara.</p></div>
+<div class="card"><div class="ico" style="background:var(--berry)">2</div><h3>Garrafón y agua embotellada</h3><p>La comunidad se acostumbró a consumirlas como alternativa.</p></div>
+<div class="card"><div class="ico" style="background:var(--pink)">3</div><h3>Microplásticos sin medir</h3><p>Posibles efectos en la salud a largo plazo. Falta saber cuántos hay donde se bebe.</p></div>
+</div></div></section>
+
+<section id="porque"><div class="wrap">
+<h2>¿Por qué Oasis?</h2><p class="lead">Frente a las otras formas de saber qué hay en el agua.</p>
+<table><thead><tr><th></th><th>Laboratorio</th><th>Filtros comerciales</th><th style="background:var(--berry)">OASIS</th></tr></thead><tbody>
+<tr><td><b>Costo por medición</b></td><td>Alto</td><td>Bajo, pero no mide</td><td style="background:#F9E3E9;color:var(--berry)"><b>Casi nulo</b></td></tr>
+<tr><td><b>Frecuencia</b></td><td>Puntual</td><td>Ninguna</td><td style="background:#F9E3E9;color:var(--berry)"><b>Programada</b></td></tr>
+<tr><td><b>Qué entrega</b></td><td>Identifica el polímero</td><td>Nada: no informa</td><td style="background:#F9E3E9;color:var(--berry)"><b>Conteo de posibles microplásticos</b></td></tr>
+<tr><td><b>Alertas</b></td><td>No</td><td>No</td><td style="background:#F9E3E9;color:var(--berry)"><b>Sí, en la página web</b></td></tr></tbody></table>
+<p class="note">Oasis cuenta posibles microplásticos. El material se confirma en laboratorio.</p></div></section>
+
+<section id="ods"><div class="wrap">
+<h2>Objetivos de Desarrollo Sostenible</h2><p class="lead">Oasis aporta a tres de ellos.</p>
+<div class="grid g3">
+<div class="card ods"><div class="ico" style="background:var(--teal)">6</div><b>Agua limpia y saneamiento</b></div>
+<div class="card ods"><div class="ico" style="background:var(--berry)">3</div><b>Salud y bienestar</b></div>
+<div class="card ods"><div class="ico" style="background:var(--pink);color:var(--ink)">17</div><b>Alianzas para lograr los objetivos</b></div>
+</div></div></section>
+
+<section class="alt" id="funciona"><div class="wrap">
+<h2>¿Cómo funciona?</h2><p class="lead">Una bomba toma una muestra del dispensador, la pasa por una membrana fina y una cámara cuenta lo que queda atrapado.</p>
+<div class="flow"><div class="node">Garrafón</div><span class="arr">→</span><div class="node">Conector T y manguera</div><span class="arr">→</span><div class="node">Bomba peristáltica</div><span class="arr">→</span><div class="node hl">Portafiltro con membrana</div><span class="arr">→</span><div class="node">Charola de goteo</div></div>
+<div class="grid g4 steps">
+<div class="card"><div class="num">1</div><h3>Filtra</h3><p>Una muestra pasa por una membrana fina.</p></div>
+<div class="card"><div class="num">2</div><h3>Polariza</h3><p>Dos películas cruzadas hacen brillar los polímeros.</p></div>
+<div class="card"><div class="num">3</div><h3>Fotografía</h3><p>Luz blanca y cámara en una caja oscura.</p></div>
+<div class="card"><div class="num">4</div><h3>Cuenta</h3><p>Visión por computadora clasifica y reporta.</p></div>
+</div>
+<p class="note">Oasis reporta <b>posibles microplásticos</b>. La confirmación del material se hace en laboratorio con FTIR o Raman. Nivel de madurez actual: TRL 3.</p>
+</div></section>
+
+<section id="dashboard"><div class="wrap">
+<h2>Dashboard</h2><p class="lead">Así se verá el monitoreo. Los datos son de ejemplo: aprieta el botón para simular una medición.</p>
+<div class="dash">
+<div class="dhead"><div><h3>Dispensador 1 · CUGDL</h3><span class="tag">Modo demostración · datos simulados</span></div><button class="btn p" id="go">Forzar ciclo de análisis</button></div>
+<div class="kpis">
+<div class="k big"><small>Partículas por litro</small><div class="v" id="kv">12</div><span class="chip" id="kl">Nivel bajo</span></div>
+<div class="k"><small>Última medición</small><div class="v" style="font-size:28px" id="kt">Hoy, 10:30</div></div>
+<div class="k"><small>Litros analizados</small><div class="v" id="kl2">0.5 L</div></div>
+<div class="k"><small>Vida de la membrana</small><div class="v" id="km">80%</div></div>
+</div>
+<div class="panels">
+<div class="panel"><h4>Imagen de la membrana</h4><canvas id="cam" width="480" height="480"></canvas>
+<div class="legend"><span><i style="background:#F7F9F9"></i>Brilla: posible plástico</span><span><i style="background:#DA627D"></i>Contada</span><span><i style="background:#50808E"></i>No brilla</span></div></div>
+<div class="panel"><h4>Últimos 7 días (partículas por litro)</h4><svg id="chart" viewBox="0 0 560 230"></svg>
+<div class="cycle" id="cyc"><span class="cs">Bomba toma muestra</span><span class="cs">Luz polarizada</span><span class="cs">Foto</span><span class="cs">Conteo</span><span class="cs">Resultado</span></div>
+<ul class="alerts" style="margin-top:14px"><li id="al1">✔ Sin alertas esta semana</li><li>Cambiar membrana en 6 días</li></ul>
+<div class="stat"><div class="dev on"><b>Bomba</b>lista</div><div class="dev on"><b>Luz y cámara</b>ok</div><div class="dev on"><b>Raspberry Pi</b>en línea</div><div class="dev on"><b>Wi-Fi</b>conectado</div></div></div>
+</div></div></div></section>
+
+<section id="modelo3d"><div class="wrap">
+<h2>Modelo 3D del dispositivo</h2><p class="lead">Así se ve por dentro. El modelo gira solo.</p>
+<div class="m3d"><canvas id="c3d" width="1000" height="640" aria-label="Modelo 3D animado del dispositivo Oasis"></canvas>
+<ol class="parts"><li>Microscopio USB</li><li>Luz blanca y polarizadores</li><li>Portafiltro y membrana</li><li>Bomba peristáltica</li><li>Conector en T y manguera</li><li>Charola de retorno</li><li>Caja oscura</li><li>Raspberry Pi Zero 2 W con Wi-Fi</li></ol></div></div></section>
+
+<section class="alt" id="costos"><div class="wrap">
+<h2>Costos de la fase TRL 3</h2><p class="lead">Prueba de concepto con componentes de bajo costo, en pesos mexicanos.</p>
+<table><thead><tr><th>Componente</th><th class="r">Costo</th></tr></thead><tbody>
+<tr><td>Microscopio USB digital</td><td class="r">$350</td></tr>
+<tr><td>Luz LED blanca y 2 películas polarizadoras</td><td class="r">$100</td></tr>
+<tr><td>Portafiltro reutilizable de 25 mm (2 piezas)</td><td class="r">$136</td></tr>
+<tr><td>Membranas blancas de éster de celulosa (MCE)</td><td class="r">$100</td></tr>
+<tr class="n"><td>Bomba peristáltica de 12 V (económica)</td><td class="r">$150</td></tr>
+<tr class="n"><td>Relevador y fuente de 12 V</td><td class="r">$190</td></tr>
+<tr><td>Raspberry Pi Zero 2 W, fuente de 5 V y microSD</td><td class="r">$550</td></tr>
+<tr><td>Manguera de silicón y conector en T (toma y retorno)</td><td class="r">$60</td></tr>
+<tr><td>Página web (subdominio y servidor del campus)</td><td class="r">$0</td></tr>
+<tr class="t"><td>Total estimado, fase TRL 3</td><td class="r">$1,636</td></tr></tbody></table>
+<p class="note">Precios mínimos estimados, sin verificar: cotizar antes de comprar. La caja oscura no se incluye porque se arma con material que ya se tenga o se imprime en 3D. Un dominio propio costaría de $185 a $445 al año; se puede pedir a la escuela un convenio para tenerlo gratis.</p>
+</div></section>
+
+<section id="anexos"><div class="wrap"><span id="pasos"></span>
+<h2>Anexos</h2><p class="lead">Análisis PESTEL, diagrama de Gantt y stakeholders.</p>
+<h3 style="font-size:24px;margin:10px 0 16px">Análisis PESTEL</h3>
+<div class="grid g3"><div class="card"><div class="ico" style="background:var(--pink);color:var(--ink)">P</div><h3>Político</h3><p>La NOM-127 de agua potable no fija límite para microplásticos. Alianzas con SIAPA y CONAGUA lo mitigan.</p></div><div class="card"><div class="ico" style="background:var(--berry)">E</div><h3>Económico</h3><p>El costo frena a los hogares. Subsidio cruzado: las ventas a purificadoras e instituciones financian el acceso en casa.</p></div><div class="card"><div class="ico" style="background:var(--teal)">S</div><h3>Social</h3><p>Una cifra alta puede alarmar. Interfaz clara y educativa, sin alarmismo.</p></div><div class="card"><div class="ico" style="background:var(--pink);color:var(--ink)">T</div><h3>Tecnológico</h3><p>El agua turbia o las fibras dan falsos positivos. Se reducen con entrenamiento continuo de la IA y confirmación en laboratorio.</p></div><div class="card"><div class="ico" style="background:var(--berry)">E</div><h3>Ecológico</h3><p>Evitamos basura electrónica con diseño modular, reparable y carcasas recicladas. Las membranas tienen manejo de residuos.</p></div><div class="card"><div class="ico" style="background:var(--teal)">L</div><h3>Legal</h3><p>Oasis no está certificado: informa posibles microplásticos, no si el agua es apta. Materiales aptos y datos protegidos.</p></div></div>
+<h3 style="font-size:24px;margin:44px 0 6px">Diagrama de Gantt</h3><p class="note" style="margin:0 0 16px">Diez meses de la idea al lanzamiento de la página.</p>
+<div class="gantt" id="g"></div>
+<h3 style="font-size:24px;margin:44px 0 16px">Stakeholders</h3>
+<div class="grid g3"><div class="card" style="background:var(--berry);border-color:var(--berry);color:#fff"><h3>Equipo OASIS</h3><p style="color:#fff">4 integrantes: investigación, hardware, IA y negocio</p></div><div class="card"><h3>CUGDL</h3><p>Autoridades, mantenimiento y usuarios: permisos, instalación y uso.</p></div><div class="card"><h3>Red Universitaria</h3><p>Centros para la expansión del piloto.</p></div><div class="card"><h3>Laboratorios de la UdeG</h3><p>Validación con FTIR o Raman.</p></div><div class="card"><h3>Purificadoras y garrafón</h3><p>Calidad, reemplazo y convenios.</p></div><div class="card"><h3>SIAPA, CONAGUA y salud</h3><p>Normatividad y uso de los datos.</p></div><div class="card"><h3>Aliados tecnológicos</h3><p>Oracle (OCI Vision) y plataforma de datos.</p></div></div>
+</div></section>
+
+<section class="alt" id="equipo"><div class="wrap">
+<h2>Equipo OASIS</h2><p class="lead">Equipo 42 · Innovación Tecnológica · CUGDL</p>
+<div class="grid g4 team">
+<div class="card"><div class="ico" style="background:var(--teal)">VC</div><h3>Valentina Carbajal Rojas</h3><p>Estrategia y modelo de negocio</p></div>
+<div class="card"><div class="ico" style="background:var(--berry)">GG</div><h3>Gabriel Hiram González González</h3><p>Arquitectura IoT y hardware</p></div>
+<div class="card"><div class="ico" style="background:var(--pink);color:var(--ink)">AP</div><h3>Ana Isabel Pérez Velázquez</h3><p>Investigación y desarrollo</p></div>
+<div class="card"><div class="ico" style="background:var(--teal)">OC</div><h3>Olin Emiliano Cisneros Lagarda</h3><p>IA y cloud</p></div>
+</div><p class="note" style="text-align:center">Profesor: Netzahualpilli Delgado Figueroa</p></div></section>
+
+<div class="quote"><div class="wrap"><p>Hagamos del agua un oasis.<br><span>Lo que se mide, se puede cambiar.</span></p></div></div>
+<footer>OASIS · Monitoreo de microplásticos en agua potable · © 2026 Equipo OASIS</footer>
+
+<script>
+// ---- Gantt
+(function(){const g=document.getElementById('g');
+g.innerHTML='<div></div>'+[1,2,3,4,5,6,7,8,9,10].map(m=>'<div class="m">M'+m+'</div>').join('');
+[['Ideación y problemática',0,1,'#DA627D'],['Diseño de hardware y de la página',0,2,'#A53860'],['Prototipo óptico y de fluidos',1,4,'#50808E'],['Entrenamiento del modelo en OCI Vision',2,6,'#DA627D'],['Pruebas de laboratorio (TRL 4)',3,6,'#A53860'],['Pruebas piloto en el CUGDL',6,8,'#50808E'],['Ajustes de la página web',7,9,'#DA627D'],['Lanzamiento de la página',8,10,'#A53860'],['Documentación y cierre',9,10,'#50808E']]
+.forEach((r,i)=>{g.insertAdjacentHTML('beforeend','<div style="grid-column:1;grid-row:'+(i+2)+'">'+r[0]+'</div><div class="bar" style="grid-row:'+(i+2)+';grid-column:'+(r[1]+2)+'/'+(r[2]+2)+';background:'+r[3]+'"></div>')});})();
+// ---- membrana
+const cam=document.getElementById('cam'),cx=cam.getContext('2d');
+let parts=[];
+function rnd(a,b){return a+Math.random()*(b-a)}
+function genParts(n){parts=[];for(let i=0;i<n+10;i++){const t=Math.random()*6.283,r=Math.sqrt(Math.random())*205;parts.push({x:240+r*Math.cos(t),y:240+r*Math.sin(t),s:rnd(2,6),glow:i<n,ph:rnd(0,6)})}}
+let scan=-1;
+function drawCam(ts){cx.clearRect(0,0,480,480);cx.fillStyle='#050b12';cx.fillRect(0,0,480,480);
+cx.save();cx.beginPath();cx.arc(240,240,215,0,6.283);cx.clip();
+const gr=cx.createRadialGradient(240,240,20,240,240,215);gr.addColorStop(0,'#14222f');gr.addColorStop(1,'#0a1520');cx.fillStyle=gr;cx.fillRect(0,0,480,480);
+parts.forEach(p=>{const tw=.6+.4*Math.sin(ts/500+p.ph);
+ if(p.glow){cx.fillStyle='rgba(247,249,249,'+(0.55+.4*tw)+')';cx.shadowColor='#fff';cx.shadowBlur=10}else{cx.fillStyle='rgba(80,128,142,.45)';cx.shadowBlur=0}
+ cx.beginPath();cx.arc(p.x,p.y,p.s,0,6.283);cx.fill();
+ if(p.glow&&p.counted){cx.shadowBlur=0;cx.strokeStyle='#DA627D';cx.lineWidth=2;cx.strokeRect(p.x-p.s-5,p.y-p.s-5,2*p.s+10,2*p.s+10)}});
+cx.shadowBlur=0;
+if(scan>=0){cx.fillStyle='rgba(218,98,125,.25)';cx.fillRect(0,scan-3,480,6);}
+cx.restore();cx.strokeStyle='#50808E';cx.lineWidth=4;cx.beginPath();cx.arc(240,240,215,0,6.283);cx.stroke();
+requestAnimationFrame(drawCam)}
+// ---- datos
+let hist=[9,11,10,14,12,15,12];const days=['L','M','X','J','V','S','D'];
+function drawChart(){const s=document.getElementById('chart'),W=560,H=230,max=Math.max(25,...hist)*1.1;
+const px=i=>40+i*(W-70)/(hist.length-1),py=v=>H-34-(v/max)*(H-60);
+let h='<g stroke="#2c4b66">'+[0,1,2,3].map(i=>'<line x1="40" x2="'+(W-30)+'" y1="'+(30+i*(H-64)/3)+'" y2="'+(30+i*(H-64)/3)+'"/>').join('')+'</g>';
+h+='<polyline fill="none" stroke="#50808E" stroke-width="4" stroke-linejoin="round" points="'+hist.map((v,i)=>px(i)+','+py(v)).join(' ')+'"/>';
+hist.forEach((v,i)=>{h+='<circle cx="'+px(i)+'" cy="'+py(v)+'" r="6" fill="#DA627D"/><text x="'+px(i)+'" y="'+(py(v)-12)+'" fill="#F7F9F9" font-size="13" text-anchor="middle">'+v+'</text><text x="'+px(i)+'" y="'+(H-10)+'" fill="#9CC3CE" font-size="13" text-anchor="middle">'+(days[i]||'+')+'</text>'});
+s.innerHTML=h}
+function level(v){return v<15?['Nivel bajo','']:v<30?['Nivel medio','mid']:['Nivel alto','hi']}
+function setResult(v){document.getElementById('kv').textContent=v;const l=level(v),c=document.getElementById('kl');c.textContent=l[0];c.className='chip '+l[1];
+const d=new Date();document.getElementById('kt').textContent='Hoy, '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+document.getElementById('kl2').textContent='0.5 L';
+const al=document.getElementById('al1');al.textContent=v>=30?'⚠ Nivel alto: revisar la fuente de agua':'✔ Sin alertas esta semana'}
+let busy=false;
+document.getElementById('go').addEventListener('click',async()=>{if(busy)return;busy=true;const cs=[...document.querySelectorAll('.cs')];cs.forEach(c=>c.className='cs');
+const n=Math.round(rnd(7,24));
+for(let i=0;i<cs.length;i++){cs[i].className='cs act';
+ if(i==0){genParts(n);parts.forEach(p=>p.counted=false)}
+ if(i==3){for(const p of parts.filter(p=>p.glow)){p.counted=true;scan=p.y;await new Promise(r=>setTimeout(r,60))}scan=-1}
+ else await new Promise(r=>setTimeout(r,900));
+ cs[i].className='cs done'}
+hist.push(n);if(hist.length>8)hist.shift();setResult(n);drawChart();
+const m=document.getElementById('km');m.textContent=Math.max(5,parseInt(m.textContent)-1)+'%';busy=false});
+genParts(12);parts.forEach(p=>p.counted=p.glow);drawChart();requestAnimationFrame(drawCam);
+</script>
+<script>(function(){const cv=document.getElementById('c3d'),g=cv.getContext('2d'),W=1000,H=640;
+function hx(h){return[parseInt(h.slice(1,3),16),parseInt(h.slice(3,5),16),parseInt(h.slice(5,7),16)]}
+let T=[];
+function pl(v,c,a,e){T.push({v:v,c:hx(c),a:a==null?1:a,e:e})}
+function box(x,y,z,w,h,d,c,a,e){const V=[];for(let i=0;i<8;i++)V.push([x+(i&1?w:-w)/2,y+(i&2?h:-h)/2,z+(i&4?d:-d)/2]);[[0,2,6,4],[1,3,7,5],[0,1,5,4],[2,3,7,6],[0,1,3,2],[4,5,7,6]].forEach(f=>pl(f.map(i=>V[i]),c,a,e))}
+function Q(ax,x,y,z,a,r,t){const s=r*Math.cos(t),u=r*Math.sin(t);return ax=='y'?[x+s,y+a,z+u]:ax=='x'?[x+a,y+s,z+u]:[x+s,y+u,z+a]}
+function cyl(x,y,z,r,l,ax,c,a,o){o=o||{};const n=o.n||14,r2=o.r2==null?r:o.r2,h=l/2,A=[],B=[];for(let i=0;i<n;i++){const t=i/n*6.2832;A.push(Q(ax,x,y,z,-h,r,t));B.push(Q(ax,x,y,z,h,r2,t))}
+for(let i=0;i<n;i++){const j=(i+1)%n;pl([A[i],A[j],B[j],B[i]],o.c2&&i%2?o.c2:c,a,o.e)}pl(A,c,a,o.e);pl(B,c,a,o.e)}
+function ring(x,y,z,ro,ri,l,ax,c,a){const n=20,h=l/2;for(let i=0;i<n;i++){const t=i/n*6.2832,u=(i+1)/n*6.2832;
+pl([Q(ax,x,y,z,-h,ro,t),Q(ax,x,y,z,-h,ro,u),Q(ax,x,y,z,h,ro,u),Q(ax,x,y,z,h,ro,t)],c,a);
+pl([Q(ax,x,y,z,-h,ri,t),Q(ax,x,y,z,-h,ri,u),Q(ax,x,y,z,h,ri,u),Q(ax,x,y,z,h,ri,t)],c,a);
+pl([Q(ax,x,y,z,h,ro,t),Q(ax,x,y,z,h,ro,u),Q(ax,x,y,z,h,ri,u),Q(ax,x,y,z,h,ri,t)],c,a);
+pl([Q(ax,x,y,z,-h,ro,t),Q(ax,x,y,z,-h,ro,u),Q(ax,x,y,z,-h,ri,u),Q(ax,x,y,z,-h,ri,t)],c,a)}}
+function tube(p,c,w){for(let i=0;i<p.length-1;i++)T.push({l:[p[i],p[i+1]],c:hx(c),w:w||8})}
+function arc(x,y,z,r,a0,a1){const p=[];for(let i=0;i<=12;i++){const t=a0+(a1-a0)*i/12;p.push([x+r*Math.cos(t),y+r*Math.sin(t),z])}return p}
+function along(p,u){let L=0,s=[];for(let i=0;i<p.length-1;i++){const d=Math.hypot(p[i+1][0]-p[i][0],p[i+1][1]-p[i][1],p[i+1][2]-p[i][2]);s.push(d);L+=d}
+let d=u*L;for(let i=0;i<s.length;i++){if(d<=s[i]||i==s.length-1){const f=Math.min(1,d/s[i]);return[0,1,2].map(k=>p[i][k]+(p[i+1][k]-p[i][k])*f)}d-=s[i]}}
+function pump(x,y,z,r,col,ang){
+cyl(x,y,z-0.1,r*0.62,0.2,'z','#6B7885');cyl(x,y,z,r,0.1,'z',col);cyl(x,y,z+0.07,r*0.12,0.06,'z','#F7F9F9');
+for(let k=0;k<3;k++){const t=ang+k*2.094,s=Math.sin(t)*0.02,c=Math.cos(t)*0.02,px=x+r*0.62*Math.cos(t),py=y+r*0.62*Math.sin(t),q=z+0.075;
+pl([[x+s,y-c,q],[x-s,y+c,q],[px-s,py+c,q],[px+s,py-c,q]],'#F7F9F9');cyl(px,py,z+0.08,r*0.17,0.06,'z','#DDE5E8',1,{n:10})}
+tube(arc(x,y,z+0.09,r*0.62,0.6,5.7),'#8FB9C4',6);
+cyl(x,y,z+0.1,r*0.9,0.02,'z','#FFFFFF',0.18,{n:20,e:'rgba(255,255,255,.5)'})}
+const FP=[[-1.7,-0.3,0],[-0.95,-0.3,0],[-0.3,-0.3,0],[0.6,-0.3,0],[0.85,-0.3,0],[1.0,-0.5,0],[1.04,-0.68,0]];
+function build(m){T=[];const ox=0.15,oz=0;
+box(0.1,-0.78,0,4.8,0.06,1.4,'#1D3B55');
+[[-2.1,-0.6],[2.3,-0.6],[-2.1,0.6],[2.3,0.6]].forEach(p=>cyl(p[0],-0.84,p[1],0.07,0.06,'y','#0B1B2A',1,{n:10}));
+cyl(ox,0.31,oz,0.46,0.72,'y','#0B1B2A',0.2,{n:24,e:'rgba(143,185,196,.45)'});
+cyl(ox,0.36,oz,0.17,0.5,'y','#3A4B5A',1,{n:16,c2:'#4A5E72'});
+[0.2,0.32,0.44,0.56].forEach(y=>ring(ox,y,oz,0.2,0.17,0.04,'y','#A53860'));
+cyl(ox,0.05,oz,0.1,0.12,'y','#C9D1D6',1,{r2:0.17,n:16});cyl(ox,-0.015,oz,0.08,0.02,'y','#13293D',1,{n:12});
+ring(ox,-0.045,oz,0.3,0.2,0.05,'y','#F7F9F9');
+cyl(ox,-0.1,oz,0.22,0.1,'y','#F7F9F9',0.1+0.08*Math.sin(m*0.02513),{r2:0.3,n:20});
+cyl(ox,-0.12,oz,0.22,0.012,'y','#9AA7B1',0.6,{n:20});cyl(ox,-0.37,oz,0.3,0.012,'y','#9AA7B1',0.6,{n:20});
+ring(ox,-0.2,oz,0.36,0.3,0.07,'y','#C9D1D6');cyl(ox,-0.3,oz,0.4,0.1,'y','#B4BEC6',1,{n:28,c2:'#8E9BA6'});cyl(ox,-0.24,oz,0.3,0.012,'y','#0B1B2A',1,{n:20});
+for(let i=0;i<9;i++){const a=i*2.4,r=0.05+0.03*i;cyl(ox+r*Math.cos(a),-0.232,oz+r*Math.sin(a),0.016,0.004,'y',Math.sin(m*0.031416+i*1.7)>-0.2?'#DA627D':'#F7F9F9',1,{n:6})}
+cyl(ox-0.45,-0.3,oz,0.04,0.14,'x','#8FB9C4',1,{n:8});cyl(ox+0.45,-0.3,oz,0.04,0.14,'x','#8FB9C4',1,{n:8});
+tube(FP,'#8FB9C4',9);
+box(-1.95,-0.2,0,0.3,0.55,0.3,'#C9D1D6');box(-1.95,0.1,0,0.3,0.06,0.3,'#8E9BA6');box(-1.95,-0.3,0.16,0.18,0.1,0.02,'#50808E');cyl(-1.95,-0.5,0,0.04,0.12,'y','#8E9BA6',1,{n:8});
+cyl(-1.75,-0.3,0,0.05,0.12,'x','#50808E',1,{n:10});
+pump(-1.3,-0.3,0.05,0.2,'#50808E',m*0.004);
+box(1.1,-0.745,0,0.5,0.03,0.4,'#B4BEC6');[0,1,2,3].forEach(i=>box(0.95+i*0.1,-0.725,0,0.04,0.012,0.3,'#13293D'));
+const px=2.05,py=-0.62,pz=0.05;
+[[-0.34,-0.15],[0.34,-0.15],[-0.34,0.15],[0.34,0.15]].forEach(o=>cyl(px+o[0],-0.7,pz+o[1],0.025,0.16,'y','#C9D1D6',1,{n:8}));
+box(px,py,pz,0.9,0.03,0.45,'#2F8F6B');box(px-0.12,py+0.03,pz+0.02,0.2,0.03,0.2,'#111B24');box(px+0.15,py+0.03,pz+0.05,0.2,0.03,0.14,'#C9D1D6');box(px-0.36,py+0.03,pz+0.12,0.1,0.03,0.08,'#C9D1D6');
+box(px,py+0.04,pz-0.2,0.84,0.04,0.05,'#111B24');for(let i=0;i<20;i++)box(px-0.4+i*0.042,py+0.07,pz-0.2,0.016,0.03,0.016,'#E6B84E');
+cyl(px+0.36,py+0.03,pz-0.1,0.02,0.01,'y',Math.sin(m*0.0062832)>0?'#DA627D':'#50808E',1,{n:8});
+{const n=Math.floor(m/375)%4;[0.14,0.24,0.34].forEach((r,i)=>{if(i<n)tube(arc(px,py+0.12,pz+0.1,r,0.9,2.24),'#DA627D',4)})}
+tube([[1.9,-0.55,0.2],[1.9,-0.7,0.4],[-1.3,-0.7,0.4]],'#DA627D',3);tube([[-1.3,-0.5,0.1],[-1.3,-0.7,0.4]],'#DA627D',3);
+tube([[0.15,0.6,0],[0.15,0.78,-0.1],[1.5,0.78,-0.25],[1.95,0.1,-0.3],[1.9,-0.55,-0.15]],'#2A3744',5);
+box(0.15,0,0,1.6,1.5,1.3,'#8FB9C4',0.08,'rgba(143,185,196,.75)');
+for(let k=0;k<6;k++){const u=(m/4000+k/6)%1,p=along(FP,u);T.push({d:p,c:hx('#F7F9F9'),r:0.032})}
+for(let k=0;k<2;k++){const u=((m/500)+k/2)%1;T.push({d:[1.04,-0.55-0.17*u,0],c:hx('#8FB9C4'),r:0.026})}}
+const B=[[1,[0.15,0.55,0]],[2,[0.5,-0.045,0.25]],[3,[0.15,-0.2,0.4]],[4,[-1.3,-0.05,0.25]],[5,[-1.5,-0.3,0.1]],[6,[1.1,-0.6,0.22]],[7,[-0.45,0.7,0.6]],[8,[2.05,-0.45,0.1]]];
+function R(p,ry,rx){const cy=Math.cos(ry),sy=Math.sin(ry),cx=Math.cos(rx),sx=Math.sin(rx),x1=p[0]*cy+p[2]*sy,z1=-p[0]*sy+p[2]*cy;return[x1,p[1]*cx-z1*sx,p[1]*sx+z1*cx]}
+function P(p){const k=900/(6-p[2]);return[500+(p[0]-0.1)*k,330-p[1]*k,k]}
+function draw(ms){const ry=0.9*Math.sin(ms*0.0005236)-0.2,rx=0.38,it=[];build(ms);g.clearRect(0,0,W,H);
+for(const s of T){if(s.l){const a=R(s.l[0],ry,rx),b=R(s.l[1],ry,rx);it.push({z:(a[2]+b[2])/2,l:[a,b],c:s.c,w:s.w});continue}
+if(s.d){const a=R(s.d,ry,rx);it.push({z:a[2]+0.05,d:a,c:s.c,r:s.r});continue}
+const v=s.v.map(p=>R(p,ry,rx)),u=[v[1][0]-v[0][0],v[1][1]-v[0][1],v[1][2]-v[0][2]],w=[v[2][0]-v[0][0],v[2][1]-v[0][1],v[2][2]-v[0][2]],n=[u[1]*w[2]-u[2]*w[1],u[2]*w[0]-u[0]*w[2],u[0]*w[1]-u[1]*w[0]],m=Math.hypot(n[0],n[1],n[2])||1;
+it.push({z:v.reduce((q,p)=>q+p[2],0)/v.length,v:v,c:s.c,a:s.a,e:s.e,l:0.5+0.5*Math.abs((n[0]*.4+n[1]*.8+n[2]*.5)/m/.99)})}
+it.sort((a,b)=>a.z-b.z);
+for(const o of it){const c=o.c;g.beginPath();
+if(o.l&&!o.v){const a=P(o.l[0]),b=P(o.l[1]);g.moveTo(a[0],a[1]);g.lineTo(b[0],b[1]);g.lineCap='round';g.lineWidth=o.w;g.strokeStyle='rgb('+c+')';g.stroke();g.lineWidth=o.w*0.35;g.strokeStyle='rgba(255,255,255,.35)';g.stroke();continue}
+if(o.d){const a=P(o.d);g.arc(a[0],a[1],o.r*a[2],0,6.2832);g.fillStyle='rgb('+c+')';g.fill();continue}
+o.v.forEach((p,i)=>{const q=P(p);i?g.lineTo(q[0],q[1]):g.moveTo(q[0],q[1])});g.closePath();
+g.fillStyle=o.a<1?'rgba('+c+','+o.a+')':'rgb('+c.map(x=>Math.round(x*o.l))+')';g.fill();
+g.lineWidth=1;g.strokeStyle=o.e||(o.a<1?'rgba(255,255,255,.25)':'rgba(0,0,0,.22)');g.stroke()}
+g.font='700 24px sans-serif';g.textAlign='center';g.textBaseline='middle';
+for(const b of B){const a=P(R(b[1],ry,rx));g.beginPath();g.arc(a[0],a[1],19,0,6.2832);g.fillStyle='#A53860';g.fill();g.lineWidth=3;g.strokeStyle='#F7F9F9';g.stroke();g.fillStyle='#F7F9F9';g.fillText(b[0],a[0],a[1]+1)}
+}
+
+
+function loop(t){draw(t);requestAnimationFrame(loop)}requestAnimationFrame(loop)})();</script>
+</body></html>
